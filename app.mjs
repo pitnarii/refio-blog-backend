@@ -1,7 +1,14 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
-import { getAllPosts, getPostById } from "./controllers/postsController.mjs";
+import {
+  getAllPosts,
+  getPostById,
+  createPost,
+  updatePost,
+  deletePost,
+} from "./controllers/postsController.mjs";
+import validateCreatePost from "./middlewares/post.validation.mjs";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -24,8 +31,8 @@ app.use(
 
 app.get("/api/posts", getAllPosts);
 app.get("/api/posts/:id", getPostById);
-app.post("/api/posts", createPost);
-app.put("/api/posts/:id", updatePost);
+app.post("/api/posts", validateCreatePost, createPost);
+app.put("/api/posts/:id", validateCreatePost, updatePost);
 app.delete("/api/posts/:id", deletePost);
 
 const server = app.listen(port, (err) => {

@@ -38,23 +38,29 @@ export const createPost = async (req, res) => {
 }
 
 export const updatePost = async (req, res) => {
-  const {id} = req.params;
-  const {data, error} = await supabase //{data, error} property from Supabase library 
-  .from("posts").update({title, content}).eq("id", id).select(); //ดึงข้อมูลทั้งหมดออกมา
-  //.eq = เท่ากับ อัปเดตเฉพาะแถวที่ id ตรงกับค่าจาก req.params
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const { data, error } = await supabase
+    .from("posts")
+    .update({ title, content })
+    .eq("id", id)
+    .select();
   if (error) {
     return res.status(500).json({ error: "Server could not update the post" });
   }
   if (!data || data.length === 0) {
     return res.status(404).json({ error: "server could not find a requested post to update" });
-  }//ถ้าไม่พบข้อมูลที่อัปเดตได้ จะส่งข้อความ error 404
+  }
   return res.status(200).json(data);
-}
+};
 
 export const deletePost = async (req, res) => {
-  const {id} = req.params; //id from request params(URL path)
-  const {data, error} = await supabase
-  .from("posts").delete().eq("id", id);
+  const { id } = req.params;
+  const { data, error } = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", id)
+    .select();
   if (error) {
     return res.status(500).json({ error: "Server could not delete post because database connection" });
   }
@@ -62,4 +68,4 @@ export const deletePost = async (req, res) => {
     return res.status(404).json({ error: "server could not find a requested post to delete" });
   }
   return res.status(200).json(data);
-}
+};
