@@ -9,6 +9,7 @@ import {
   deletePost,
 } from "./controllers/postsController.mjs";
 import validateCreatePost from "./middlewares/post.validation.mjs";
+import authRouter from "./routes/auth.mjs";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -25,9 +26,7 @@ app.use(
   })
 );
 
-// app.get("/health", (req, res) => {
-//   res.status(200).json({ message: "OK" });
-// });
+app.use("/api/auth", authRouter);
 
 app.get("/api/posts", getAllPosts);
 app.get("/api/posts/:id", getPostById);

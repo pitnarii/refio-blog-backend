@@ -1,4 +1,4 @@
-import { supabase } from "../lib/supabase.mjs";
+import supabase from "../lib/supabase.mjs";
 
 export const getAllPosts = async (req, res) => {
   const { data, error } = await supabase.from("posts").select("*");
@@ -28,21 +28,25 @@ export const getPostById = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
-  const {title, content} = req.body;
-  const {data, error} = await supabase
-  .from("posts").insert({title, content});
+  const { title, image, category_id, description, content, status_id } =
+    req.body;
+  const { data, error } = await supabase
+    .from("posts")
+    .insert({ title, image, category_id, description, content, status_id })
+    .select();
   if (error) {
     return res.status(500).json({ error: "Server could not create a new post" });
   }
-  return res.status(200).json(data);
-}
+  return res.status(201).json(data);
+};
 
 export const updatePost = async (req, res) => {
   const { id } = req.params;
-  const { title, content } = req.body;
+  const { title, image, category_id, description, content, status_id } =
+    req.body;
   const { data, error } = await supabase
     .from("posts")
-    .update({ title, content })
+    .update({ title, image, category_id, description, content, status_id })
     .eq("id", id)
     .select();
   if (error) {
