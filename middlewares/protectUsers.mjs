@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import supabase from "../lib/supabase.mjs";
 
 const protectUser = async (req, res, next) => {

@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import connectionPool from "../utils/db.mjs";
 import supabase from "../lib/supabase.mjs";
 
