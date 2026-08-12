@@ -30,12 +30,12 @@ app.use(
 );
 
 app.use("/api/auth", authRouter);
-app.use("/api/posts", postRouter);
+app.use("/api/posts", postRouter);   // อัปโหลดไฟล์
 app.get("/api/posts", getAllPosts);
 app.get("/api/posts/:id", getPostById);
 app.post("/api/posts", validateCreatePost, createPost);
-app.put("/api/posts/:id", validateCreatePost, updatePost);
-app.delete("/api/posts/:id", deletePost);
+app.put("/api/admin/posts/:id", validateCreatePost, updatePost);
+app.delete("/api/admin/posts/:id", deletePost);
 
 //auth users
 app.get("/protected-route", protectUser, (req, res) => {
