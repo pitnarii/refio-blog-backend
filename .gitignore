@@ -1,4 +1,47 @@
-node_modules
-package-lock.json
-.env 
-.cursor
+# Dependencies
+node_modules/
+
+# Environment & secrets (never commit)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_rsa.*
+credentials.json
+service-account*.json
+secrets/
+.secrets/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+.cursor/
+
+# Build / cache
+dist/
+build/
+.cache/
+.tmp/
+temp/
+coverage/
+.nyc_output/
+
+# Vercel local
+.vercel/
+
+# Optional lockfile policy (keep committed if you want reproducible installs)
+# package-lock.json
